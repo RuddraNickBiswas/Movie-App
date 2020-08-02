@@ -92,14 +92,14 @@
   -webkit-transform: translateY(8px) rotate(45deg);
   -ms-transform: translateY(8px) rotate(45deg);
   -o-transform: translateY(8px) rotate(45deg);
-  transform: translateY(8px) rotate(45deg);
+  transform: translateY(8px) rotate(135deg);
 }
 
 #header-mobile-menu.is-active .bar:nth-child(3) {
   -webkit-transform: translateY(-8px) rotate(-45deg);
   -ms-transform: translateY(-8px) rotate(-45deg);
   -o-transform: translateY(-8px) rotate(-45deg);
-  transform: translateY(-8px) rotate(-45deg);
+  transform: translateY(-8px) rotate(-135deg);
 }
 
 .search-input {
