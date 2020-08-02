@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './mainContent.style.scss'
 import SlideShow from '../slide-show/SlideShow.component'
+import Paginate from '../paginate/Paginate.component'
+
 const MainContent = () => {
     const images =[
         {
@@ -18,12 +20,22 @@ const MainContent = () => {
 
     ]
 
+    const [currentPage, setCurrentPage] = useState(1)
+
+    const paginate = type => {
+        if(type === 'prev' && currentPage > 1){
+            setCurrentPage((prev) => prev -1)
+        }else{
+            setCurrentPage((prev) => prev+1)
+
+        }
+    }
     return (
         <div className = "main-content">
             <SlideShow images = {images} auto = {true}  showArrows = {true}/>
             <div className="grid-movie-title">
                 <div className = "movieType">Now Playing</div>
-                <div className = "paginate">Paginate</div>
+                <div className = "paginate"><Paginate paginate = {paginate} currentPage ={currentPage} totalPages = {10}/></div>
             </div>
             {/* ditsplay grid component */}
         </div>
