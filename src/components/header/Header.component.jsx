@@ -1,39 +1,61 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import {getMovies, setMovieType, setResponsePageNumber} from '../../redux/actions/movies'
+import {useDispatch , useSelector} from 'react-redux'
 import './header.style.scss'
 import logo from '../../assest/logo.svg'
+
  const Header = () => {
      let [navClass, setNavClass] = useState(false)
      let [menuClass, setMenuClass] = useState(false)
+     const [type, setType] = useState("now_playing")
 
+     
+     const dispatch = useDispatch()
+     
+    //  const list = useSelector(state => state.movies.list)
+     const page = useSelector(state => state.movies.page)
+     const totalPages = useSelector(state => state.movies.totalPages)
+     
      const HEADER_LIST =[
         {
             id: 1,
              iconClass: 'fas fa-film',
-             name : "Now Playing",
+            name : 'Now Playing',
              type: 'now_playing'
         },
         {
             id: 2,
              iconClass: 'fas fa-fire',
-             name : "Popular",
+             name : 'Popular',
              type: 'popular'
         },
-
+ 
         {
             id: 3,
              iconClass: 'fas fa-star',
-             name : "Top Rated",
+             name : 'Top Rated',
              type: 'top_rated'
         },
-
+ 
         {
             id: 4,
              iconClass: 'fas fa-plus-square',
-             name : "Upcomming",
-             type: 'upcomming'
+             name: 'Upcomming',
+             type: 'upcoming'
         },
-
+ 
     ]
+    useEffect(() => {
+        
+        dispatch(getMovies(type, page))
+        // dispatch(setResponsePageNumber(page, totalPages))
+    }, [dispatch, type])
+
+    const setMovieTypeUrl = (type ) => {
+      setType(type)
+      
+      dispatch(setMovieType(type))
+    }
     const toggleMenu = () => {
         menuClass = !menuClass;
         navClass = !navClass;
@@ -69,7 +91,8 @@ import logo from '../../assest/logo.svg'
                        HEADER_LIST.map(data => (
                          <li
                          key = {data.id}
-                         className = "header-nav-item">
+                         onClick = {() => setMovieTypeUrl(data.type)}
+                         className = { data.type === type ? "header-nav-item active-item" : "header-nav-item"}>
                              <span className = 'header-list-icon'>
                                  <i className = {data.iconClass}></i> 
                              </span>
