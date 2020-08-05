@@ -8,7 +8,12 @@
     grid-template-areas:"movieType . paginate" ;
     grid-template-columns: max-content 1fr max-content;
     grid-template-rows: 1fr;
-.movieType{
+    margin-bottom: 30px;
+    font-size: 18px;
+    color: #ffffff;
+    width: inherit;    
+
+    .movieType{
         grid-area: movieType;
         text-align: left;
         padding: 8px 25px;
