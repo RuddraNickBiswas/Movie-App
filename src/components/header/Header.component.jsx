@@ -1,15 +1,17 @@
 import React, {useState, useEffect} from 'react'
-import {getMovies, setMovieType, setResponsePageNumber} from '../../redux/actions/movies'
+import {getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResult} from '../../redux/actions/movies'
 import {useDispatch , useSelector} from 'react-redux'
 import './header.style.scss'
 import logo from '../../assest/logo.svg'
+import { Search } from 'semantic-ui-react'
 
  const Header = () => {
      let [navClass, setNavClass] = useState(false)
      let [menuClass, setMenuClass] = useState(false)
+     let [search, setSearch] = useState('')
      const [type, setType] = useState("now_playing")
 
-     
+    
      const dispatch = useDispatch()
      
     //  const list = useSelector(state => state.movies.list)
@@ -56,6 +58,13 @@ import logo from '../../assest/logo.svg'
       
       dispatch(setMovieType(type))
     }
+   const onSearchChange = (e) => {
+       console.log(e.target.value)
+       setSearch(e.target.value)
+       dispatch(searchQuery(e.target.value))
+       dispatch(searchResult(e.target.value))
+   } 
+
     const toggleMenu = () => {
         menuClass = !menuClass;
         navClass = !navClass;
@@ -104,6 +113,8 @@ import logo from '../../assest/logo.svg'
                <input
                 className ="search-input" 
                  type = "text"
+                 value ={search}
+                 onChange = {onSearchChange}
                  placeholder = "search for a movie"
                  />
                 </ul>
