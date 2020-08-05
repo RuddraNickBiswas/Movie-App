@@ -4,7 +4,6 @@ const initialState = {
     list : [],
     page : 1,
     totalPages : 0,
-    movieType : 'now_playing'
 
 } 
 
@@ -36,6 +35,7 @@ export default (state = initialState , action) => {
           ...state,
           movieType : action.payload
         };
+
 
         default :
         return state

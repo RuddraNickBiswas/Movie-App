@@ -1,5 +1,4 @@
 import * as actionTypes from '../types'
-import { MOVIE_API_URL } from '../../services/movice.service'
 
 
 // const movies = await  MOVIE_API_URL(type, pageNumber)
@@ -37,8 +36,7 @@ export const loadMoreMovies = (type, pageNumber) => async (dispatch) => {
     }
   }
 };
-  
-  export const setResponsePageNumber = (page, totalPages) => async (dispatch) => {
+ort const setResponsePageNumber = (page, totalPages) => async (dispatch) => {
     const payload = { page, totalPages };
     dispatchMethod(actionTypes.RESPONST_PAGE, payload, dispatch);
   };
@@ -50,6 +48,7 @@ export const setMovieType =  (type ) =>  async dispatch => {
   dispatchMethod(actionTypes.MOVIE_TYPE ,type, dispatch )
 }
 
+ster
 
 
 const dispatchMethod = (type, payload, dispatch) => {

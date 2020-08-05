@@ -1,21 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import {getMovies, setMovieType, setResponsePageNumber} from '../../redux/actions/movies'
-import {useDispatch , useSelector} from 'react-redux'
-import './header.style.scss'
-import logo from '../../assest/logo.svg'
 
  const Header = () => {
      let [navClass, setNavClass] = useState(false)
      let [menuClass, setMenuClass] = useState(false)
-     const [type, setType] = useState("now_playing")
-
-     
+<<
      const dispatch = useDispatch()
      
     //  const list = useSelector(state => state.movies.list)
      const page = useSelector(state => state.movies.page)
      const totalPages = useSelector(state => state.movies.totalPages)
      
+
      const HEADER_LIST =[
         {
             id: 1,
@@ -55,7 +50,7 @@ import logo from '../../assest/logo.svg'
       setType(type)
       
       dispatch(setMovieType(type))
-    }
+
     const toggleMenu = () => {
         menuClass = !menuClass;
         navClass = !navClass;
@@ -73,10 +68,7 @@ import logo from '../../assest/logo.svg'
         <>
             <div className = "header-nav-wrapper" >
             <div className="header-bar"></div>
-            <div className="header-navbar">
-               <div className="header-image">
-                   <img src={logo} alt="logo "/>
-                </div> 
+     
                 <div
                  className= {`${menuClass ? 'header-menu-toggle is-active' : 'header-menu-toggle ' }` } 
                  id = 'header-mobile-menu'
@@ -102,13 +94,7 @@ import logo from '../../assest/logo.svg'
                        ))
                    }
                <input
-                className ="search-input" 
-                 type = "text"
-                 placeholder = "search for a movie"
-                 />
-                </ul>
-            </div>
-            </div>
+       
         </>
     )
 }

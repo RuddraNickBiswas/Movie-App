@@ -11,6 +11,7 @@ const Main = () => {
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
     const list = useSelector(state => state.movies.list)
+
     const totalPages = useSelector(state => state.movies.totalPages)
     const page = useSelector(state => state.movies.page)
     const movieType = useSelector(state => state.movies.movieType)
@@ -19,7 +20,7 @@ const Main = () => {
     const mainRef = useRef()
     const bottomLineRef = useRef()
     useEffect(() => {
-        console.log(page)
+
         setLoading(true);
         setTimeout(() => {
             setLoading(false)
@@ -56,7 +57,7 @@ const Main = () => {
       return (
         <>
           <div className="main" ref={mainRef} onScroll={handleScroll}>
-            {loading ? <LoaderSvg /> : <MainContent />}
+
             <div ref={bottomLineRef}></div>
           </div>
         </>
