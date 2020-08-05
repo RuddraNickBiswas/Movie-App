@@ -5,14 +5,13 @@ import MainContent from '../content/main-content/MainContent.component'
 import LoaderSvg from '../../loaderSvg/LoaderSvg'
 import PropTyps from 'prop-types'
 import { loadMoreMovies, setResponsePageNumber } from '../../redux/actions/movies'
-import SearchResult from '../content/search-result/SearchResults.component'
 
 const Main = () => {
 
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
     const list = useSelector(state => state.movies.list)
-    const searchResult = useSelector(state => state.movies.searchResult)
+
     const totalPages = useSelector(state => state.movies.totalPages)
     const page = useSelector(state => state.movies.page)
     const movieType = useSelector(state => state.movies.movieType)
@@ -21,7 +20,7 @@ const Main = () => {
     const mainRef = useRef()
     const bottomLineRef = useRef()
     useEffect(() => {
-       
+
         setLoading(true);
         setTimeout(() => {
             setLoading(false)
@@ -33,7 +32,7 @@ const Main = () => {
      
         dispatch(loadMoreMovies(movieType, currentPage ))
     }, [ currentPage ,totalPages]) 
- 
+
 
     const fetchData = () => {
       let pageNumber = currentPage
@@ -58,12 +57,7 @@ const Main = () => {
       return (
         <>
           <div className="main" ref={mainRef} onScroll={handleScroll}>
-            {loading ? <LoaderSvg /> :
-            <>
-            {searchResult && searchResult.length === 0 ?  <MainContent/>  : <SearchResult/> }
-            </>
-  
-            }
+
             <div ref={bottomLineRef}></div>
           </div>
         </>

@@ -1,25 +1,15 @@
 import React, {useState, useEffect} from 'react'
-import {getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResult} from '../../redux/actions/movies'
-import {useDispatch , useSelector} from 'react-redux'
-import {useHistory} from 'react-router-dom'
-import './header.style.scss'
-import logo from '../../assest/logo.svg'
-import { Search } from 'semantic-ui-react'
 
  const Header = () => {
      let [navClass, setNavClass] = useState(false)
      let [menuClass, setMenuClass] = useState(false)
-     let [search, setSearch] = useState('')
-     const [type, setType] = useState("now_playing")
-
-    
+<<
      const dispatch = useDispatch()
      
     //  const list = useSelector(state => state.movies.list)
      const page = useSelector(state => state.movies.page)
      const totalPages = useSelector(state => state.movies.totalPages)
      
-    const history = useHistory()
 
      const HEADER_LIST =[
         {
@@ -60,17 +50,6 @@ import { Search } from 'semantic-ui-react'
       setType(type)
       
       dispatch(setMovieType(type))
-    }
-   const onSearchChange = (e) => {
-       console.log(e.target.value)
-       setSearch(e.target.value)
-       dispatch(searchQuery(e.target.value))
-       dispatch(searchResult(e.target.value))
-   } 
-
-   const navigateToHome = () => {
-       history.push('/')
-   }
 
     const toggleMenu = () => {
         menuClass = !menuClass;
@@ -89,10 +68,7 @@ import { Search } from 'semantic-ui-react'
         <>
             <div className = "header-nav-wrapper" >
             <div className="header-bar"></div>
-            <div className="header-navbar">
-               <div className="header-image" onClick = {() => navigateToHome()} >
-                   <img src={logo} alt="logo "/>
-                </div> 
+     
                 <div
                  className= {`${menuClass ? 'header-menu-toggle is-active' : 'header-menu-toggle ' }` } 
                  id = 'header-mobile-menu'
@@ -118,15 +94,7 @@ import { Search } from 'semantic-ui-react'
                        ))
                    }
                <input
-                className ="search-input" 
-                 type = "text"
-                 value ={search}
-                 onChange = {onSearchChange}
-                 placeholder = "search for a movie"
-                 />
-                </ul>
-            </div>
-            </div>
+       
         </>
     )
 }

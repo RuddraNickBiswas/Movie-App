@@ -1,5 +1,4 @@
 import * as actionTypes from '../types'
-import { MOVIE_API_URL, SEARCH_API_URL } from '../../services/movice.service'
 
 
 // const movies = await  MOVIE_API_URL(type, pageNumber)
@@ -37,26 +36,7 @@ export const loadMoreMovies = (type, pageNumber) => async (dispatch) => {
     }
   }
 };
-
-export const searchResult =  (query ) =>  async dispatch => {
-
-  try {
-    if(query){
-      const movies = await SEARCH_API_URL(query) ;
-      const {results} = movies.data
-      dispatchMethod(actionTypes.SEARCH_RESULT, results, dispatch);
-    } else{
-      dispatchMethod(actionTypes.SEARCH_RESULT, [], dispatch);
-
-    }
-  }catch(error){
-    dispatchMethod(actionTypes.SET_ERROR, error.response.data.message, dispatch);
-  }
-
- 
-}
-
-  export const setResponsePageNumber = (page, totalPages) => async (dispatch) => {
+ort const setResponsePageNumber = (page, totalPages) => async (dispatch) => {
     const payload = { page, totalPages };
     dispatchMethod(actionTypes.RESPONST_PAGE, payload, dispatch);
   };
@@ -68,12 +48,7 @@ export const setMovieType =  (type ) =>  async dispatch => {
   dispatchMethod(actionTypes.MOVIE_TYPE ,type, dispatch )
 }
 
-export const searchQuery =  (query ) =>  async dispatch => {
-
-
-  dispatchMethod(actionTypes.SEARCH_QUERY ,query, dispatch )
-}
-
+ster
 
 
 const dispatchMethod = (type, payload, dispatch) => {
