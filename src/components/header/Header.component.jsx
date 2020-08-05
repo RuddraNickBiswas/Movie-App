@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResult} from '../../redux/actions/movies'
 import {useDispatch , useSelector} from 'react-redux'
+import {useHistory} from 'react-router-dom'
 import './header.style.scss'
 import logo from '../../assest/logo.svg'
 import { Search } from 'semantic-ui-react'
@@ -18,6 +19,8 @@ import { Search } from 'semantic-ui-react'
      const page = useSelector(state => state.movies.page)
      const totalPages = useSelector(state => state.movies.totalPages)
      
+    const history = useHistory()
+
      const HEADER_LIST =[
         {
             id: 1,
@@ -65,6 +68,10 @@ import { Search } from 'semantic-ui-react'
        dispatch(searchResult(e.target.value))
    } 
 
+   const navigateToHome = () => {
+       history.push('/')
+   }
+
     const toggleMenu = () => {
         menuClass = !menuClass;
         navClass = !navClass;
@@ -83,7 +90,7 @@ import { Search } from 'semantic-ui-react'
             <div className = "header-nav-wrapper" >
             <div className="header-bar"></div>
             <div className="header-navbar">
-               <div className="header-image">
+               <div className="header-image" onClick = {() => navigateToHome()} >
                    <img src={logo} alt="logo "/>
                 </div> 
                 <div
