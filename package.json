@@ -1,7 +1,11 @@
 {
   "name": "rproject",
   "version": "0.1.0",
+  "description": "a really cool app",
   "private": true,
+  "engines": {
+    "node": "14.5.0"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
