@@ -1,17 +1,19 @@
 import React, {useState, useEffect} from 'react'
-import {getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResult} from '../../redux/actions/movies'
+import {getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResult ,clearMovieDetails} from '../../redux/actions/movies'
 import {useDispatch , useSelector} from 'react-redux'
-import {useHistory} from 'react-router-dom'
+import {useHistory , useLocation} from 'react-router-dom'
 import './header.style.scss'
 import logo from '../../assest/logo.svg'
-import { Search } from 'semantic-ui-react'
+
 
  const Header = () => {
      let [navClass, setNavClass] = useState(false)
      let [menuClass, setMenuClass] = useState(false)
      let [search, setSearch] = useState('')
+     let [disableSearch, setDisableSearch] = useState(false)
      const [type, setType] = useState("now_playing")
 
+     const location =useLocation()
     
      const dispatch = useDispatch()
      
@@ -51,15 +53,25 @@ import { Search } from 'semantic-ui-react'
  
     ]
     useEffect(() => {
-        
         dispatch(getMovies(type, page))
-        // dispatch(setResponsePageNumber(page, totalPages))
-    }, [dispatch, type])
+        dispatch(setResponsePageNumber(page, totalPages))
+        if(location.pathname !== '/' && location.key) {
+           
+            setDisableSearch(true)
+        }
+    }, [ dispatch, type , location])
 
     const setMovieTypeUrl = (type ) => {
-      setType(type)
-      
-      dispatch(setMovieType(type))
+        setDisableSearch(false)
+        if(location.pathname !== '/') {
+            clearMovieDetails()
+            history.push('/')
+            setType(type)
+            setMovieType(type)
+        }else{
+             setType(type)
+            dispatch(setMovieType(type))
+        }
     }
    const onSearchChange = (e) => {
        console.log(e.target.value)
@@ -69,6 +81,8 @@ import { Search } from 'semantic-ui-react'
    } 
 
    const navigateToHome = () => {
+       dispatch(clearMovieDetails())
+       setDisableSearch(false)
        history.push('/')
    }
 
@@ -118,7 +132,7 @@ import { Search } from 'semantic-ui-react'
                        ))
                    }
                <input
-                className ="search-input" 
+                className = {`search-input ${disableSearch ? 'disabled' : ''} `} 
                  type = "text"
                  value ={search}
                  onChange = {onSearchChange}

@@ -1,5 +1,5 @@
 import * as actionTypes from '../types'
-import { MOVIE_API_URL, SEARCH_API_URL } from '../../services/movice.service'
+import { MOVIE_API_URL, SEARCH_API_URL ,MOVIE_DETAILS_URL , MOVIE_CREDIT_URL , MOVIE_IMAGES_URL ,MOVIE_VIDEOS_URL, MOVIE_REVIEWS_URL } from '../../services/movice.service'
 
 
 // const movies = await  MOVIE_API_URL(type, pageNumber)
@@ -75,6 +75,35 @@ export const searchQuery =  (query ) =>  async dispatch => {
 }
 
 
+////movie details function
+export const movieDetails = (id) => async dispatch => {
+
+  try {
+
+    const details = await MOVIE_DETAILS_URL(id)
+    const credit = await MOVIE_CREDIT_URL(id)
+    const images = await MOVIE_IMAGES_URL(id)
+    const videos = await MOVIE_VIDEOS_URL(id)
+    const reviews = await MOVIE_REVIEWS_URL(id)
+
+    const resp = await Promise.all([details , credit, images , videos ,reviews])
+    .then(values => Promise.all(
+      values.map(value => value.data)
+    )).then(response => response )
+    dispatchMethod(actionTypes.MOVIE_DETAILS , resp ,dispatch)
+
+  }catch(error){
+    dispatchMethod(actionTypes.SET_ERROR, error.response.data.message, dispatch);
+  }
+
+  
+}
+
+export const clearMovieDetails =   () =>  async dispatch => {
+
+ dispatchMethod(actionTypes.CLEAR_MOVIE_DETAILS ,[], dispatch )
+}
+ 
 
 const dispatchMethod = (type, payload, dispatch) => {
     dispatch({

@@ -6,7 +6,8 @@ const initialState = {
     totalPages : 0,
     movieType : 'now_playing',
     searchQuery : '',
-    searchResult : []
+    searchResult : [],
+    movie : []
 
 } 
 
@@ -49,6 +50,16 @@ export default (state = initialState , action) => {
               ...state,
               searchResult : action.payload
             };
+            case actionTypes.MOVIE_DETAILS :
+              return {
+                ...state,
+                movie : action.payload
+              };
+              case actionTypes.CLEAR_MOVIE_DETAILS :
+                return {
+                  ...state,
+                  movie : []
+                };
 
         default :
         return state
