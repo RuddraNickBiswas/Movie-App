@@ -8,7 +8,7 @@ import Overview from './overview/Overview.component'
 import Crew from './crew/Crew.component'
 import Media from './media/Media.component'
 import Reviews from './review/Reviews.component'
-import { movieDetails } from '../../../redux/actions/movies'
+import { movieDetails, clearMovieDetails } from '../../../redux/actions/movies'
 import { IMAGE_URL } from '../../../services/movice.service'
 
 const Details = () => {
@@ -22,10 +22,18 @@ const Details = () => {
 
             const resp = dispatch(movieDetails(id))
             
+        
         }
-
         setDetails(movie[0])
+  
     }, [id , movie])
+    useEffect(() => {
+        
+        return () => {
+          
+            dispatch(clearMovieDetails())
+        }
+    }, [dispatch])
 
     return (
         <>
