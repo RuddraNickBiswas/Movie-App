@@ -3,7 +3,7 @@ import {getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResul
 import {useDispatch , useSelector} from 'react-redux'
 import {useHistory , useLocation} from 'react-router-dom'
 import './header.style.scss'
-import logo from '../../assest/logo.svg'
+import logo from '../../assest/logo.png'
 
 
  const Header = () => {
@@ -74,7 +74,7 @@ import logo from '../../assest/logo.svg'
         }
     }
    const onSearchChange = (e) => {
-       console.log(e.target.value)
+       
        setSearch(e.target.value)
        dispatch(searchQuery(e.target.value))
        dispatch(searchResult(e.target.value))
