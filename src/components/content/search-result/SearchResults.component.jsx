@@ -1,6 +1,7 @@
 import React,{useState, useEffect , Fragment} from 'react'
 import {useSelector ,} from 'react-redux'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 import {v4 as uuidv4} from 'uuid'
 import './searchResult.style.scss'
 import '../grid/grid.style.scss'
@@ -21,6 +22,11 @@ const SearchResult = (props) => {
         setMovieDeta(searchResult)
     }, [searchResult])
     
+    const formatMovieTitle = (title) => {
+        const titleStr = title.toLowerCase()
+        
+        return titleStr.replace(/ /g, '-')
+    }
 
     return (
         <div className = "searchKeyword">
@@ -43,7 +49,7 @@ const SearchResult = (props) => {
  
                        <div className = "grid-read-more">
                            <button className = "grid-cell-button">
-                               Read More
+                           <Link to = {`/${deta.id}/${formatMovieTitle(deta.title)}/details`}>Read More</Link>
                            </button>
                        </div>
                         <div className="grid-detail">

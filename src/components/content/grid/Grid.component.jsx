@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {v4 as uuidv4} from 'uuid'
 import './grid.style.scss'
@@ -15,6 +16,11 @@ const Grid = (props) => {
         setMovieDeta(list)
     }, [list])
     
+    const formatMovieTitle = (title) => {
+        const titleStr = title.toLowerCase()
+        
+        return titleStr.replace(/ /g, '-')
+    }
 
     return (
         <>
@@ -31,7 +37,7 @@ const Grid = (props) => {
  
                        <div className = "grid-read-more">
                            <button className = "grid-cell-button">
-                               Read More
+                            <Link to = {`/${deta.id}/${formatMovieTitle(deta.title)}/details`}>Read More</Link>
                            </button>
                        </div>
                         <div className="grid-detail">
